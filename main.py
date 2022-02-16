@@ -28,6 +28,7 @@ def new_fight(players: list, enemies: list):
 
         target.take_damage(char.attack())
         if target.get_health() == 0:
+            print(f"{char.get_name()} was attack by {target.get_name()}.")
             print(f"{char.get_name()} has killed {target.get_name()}.")
             if(type(target) == Goblin):
                 enemies.remove(target)
@@ -49,8 +50,9 @@ def main():
     players.append(nick)
     players.append(emy)
     
-    enemies.append(Goblin(1))
-    enemies.append(Goblin(2))
+    for i in range(random.randint(2,4)):
+        enemies.append(Goblin(i))
+    
 
     #fight(emy, enemies)
 
