@@ -43,7 +43,7 @@ class Goblin:
     def take_damage(self, dmg):
         actual_damage = dmg - self.armor
         if actual_damage < 0: actual_damage = 0 
-        if (self.health - actual_damage) > 0: self.health = 0
+        if (self.health - actual_damage) < 0: self.health = 0
         else: self.health -= actual_damage
         print(f"Goblin #{self.id} took {actual_damage} dmg")
 
