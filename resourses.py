@@ -29,23 +29,23 @@ class Character:
     def get_name(self):
         return self.name
         
-class Goblin:
+class Monster:
 
     def __init__(self, id):
         self.id = id
         self.health = 10
         self.damage = 3
-        self.armor = 2
+        self.armor = 1
     
     def __str__(self):
-        return f"ID: {self.id}\nHealth: {self.health}\nDamage: {self.damage}\nArmor: {self.armor}"
+        return f"Monster: {self.id}\nHealth: {self.health}\nDamage: {self.damage}\nArmor: {self.armor}"
 
     def take_damage(self, dmg):
         actual_damage = dmg - self.armor
         if actual_damage < 0: actual_damage = 0 
         if (self.health - actual_damage) < 0: self.health = 0
         else: self.health -= actual_damage
-        print(f"Goblin #{self.id} took {actual_damage} dmg")
+        print(f"Monster #{self.id} took {actual_damage} dmg")
 
 
     def attack(self):
@@ -55,7 +55,7 @@ class Goblin:
         return self.health
 
     def get_name(self):
-        return f"Goblin #{self.id}"
+        return f"Monster #{self.id}"
 
 # Functions
 def hello():
