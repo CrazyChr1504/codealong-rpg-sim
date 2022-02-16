@@ -1,6 +1,8 @@
 # Imports
 # Global variables
 # Classes
+
+
 class Character:
 
     def __init__(self, name, health, damage, armor):
@@ -14,7 +16,8 @@ class Character:
 
     def take_damage(self, dmg):
         actual_damage = dmg - self.armor
-        if (self.health - actual_damage) > 0: self.health = 0
+        if actual_damage < 0: actual_damage = 0            
+        if (self.health - actual_damage) < 0: self.health = 0
         else: self.health -= actual_damage
     
     def attack(self):
@@ -22,6 +25,9 @@ class Character:
         
     def get_health(self):
         return self.health
+
+    def get_name(self):
+        return self.name
         
 class Goblin:
 
@@ -36,14 +42,20 @@ class Goblin:
 
     def take_damage(self, dmg):
         actual_damage = dmg - self.armor
+        if actual_damage < 0: actual_damage = 0 
         if (self.health - actual_damage) > 0: self.health = 0
         else: self.health -= actual_damage
+        print(f"Goblin #{self.id} took {actual_damage} dmg")
+
 
     def attack(self):
         return self.damage
         
     def get_health(self):
         return self.health
+
+    def get_name(self):
+        return f"Goblin #{self.id}"
 
 # Functions
 def hello():
