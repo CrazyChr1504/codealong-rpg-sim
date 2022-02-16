@@ -35,10 +35,13 @@ def new_fight(players: list, enemies: list):
             else:
                 players.remove(target)
             participants.remove(target)
+        
         else:
             print(f"{target.get_name()} was attack by {char.get_name()}.")
             print(f"{target.get_name()} has {target.get_health()} hp left.")
         
+        if len(players) == 0 or len(enemies) == 0:
+            break
 
 def main():
     
