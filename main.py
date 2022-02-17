@@ -1,8 +1,8 @@
 from resourses import Character, Monster
 import random
-
+turn = 1
 def new_fight(players: list, enemies: list):
-
+    global turn
     participants = players + enemies # Puts together the participants in one list
     random.shuffle(participants)
 
@@ -30,7 +30,7 @@ def new_fight(players: list, enemies: list):
         
         if len(players) == 0 or len(enemies) == 0:
             break
-
+    turn +1
 def main():
     
     enemies = []
