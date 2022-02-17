@@ -7,6 +7,7 @@ def new_fight(players: list, enemies: list):
     random.shuffle(participants)
 
     for char in participants:
+        print(f"\nTurn {turn}\n")
         target = ""
         # Check if player or monster
         if char in players:
