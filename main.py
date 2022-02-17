@@ -29,9 +29,10 @@ def new_fight(players: list, enemies: list):
             print(f"{target.get_name()} was attack by {char.get_name()}.")
             print(f"{target.get_name()} has {target.get_health()} hp left.")
         
+        turn += 1
+        
         if len(players) == 0 or len(enemies) == 0:
             break
-        turn +1
 def main():
     
     enemies = []
