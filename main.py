@@ -1,6 +1,10 @@
-from resourses import Character, Monster
+# Imports
+from resourses import Character, Monster, save_character, load_characters
 import random
+# Global variables
 turn = 1
+# Classes
+# Functions
 def new_fight(players: list, enemies: list):
     global turn
     participants = players + enemies # Puts together the participants in one list
@@ -31,32 +35,31 @@ def new_fight(players: list, enemies: list):
         
         turn += 1
         
-        if len(players) == 0 or len(enemies) == 0:
-            break
+        if len(players) == 0 or len(enemies) == 0: break
+
+# Main
 def main():
     
     enemies = []
-    players = []
-
-    nick = Character("Nick", 15, 3, 1)
-    emy = Character("Emy", 20, 6, 5)
-    players.append(nick)
-    players.append(emy)
-    
-    for i in range(random.randint(2,4)):
+   
+    for i in range(1, random.randint(3,12)):
         enemies.append(Monster(i))
     
-
-    #fight(emy, enemies)
-
+    #save_character(emy)
+    players = load_characters()
+    for player in players:
+        print(player)
+        print()
+    
     while len(enemies) != 0 and len(players) != 0:
         new_fight(players, enemies)
 
     if len(enemies) == 0:
-        print("The players won!")
+        print("The players won!\n")
     elif len(players) == 0:
-        print("The Monsters won!")
-        print("GAME OVER")
+        print("Gruffbarb won!")
+        print("GAME OVER\n")
     
+
 if __name__ == "__main__":
     main()
