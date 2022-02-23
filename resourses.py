@@ -1,6 +1,15 @@
 # Imports
+from random import choice, randint
 # Global variables
 # Classes
+class Weapon:
+    
+    def __init__(self, name, damage):
+        self.name = name
+        self.damage = damage
+
+    def return_damage(self):
+        return self.damage
 
 class Character:
 
@@ -36,11 +45,19 @@ class Monster:
     def __init__(self, id):
         self.id = id
         self.health = 10
-        self.damage = 4
+        self.give_weapon()
         self.armor = 1
+        self.damage = self.weapon.return_damage()
     
     def __str__(self):
         return f"Gruffbarb: {self.id}\nHealth: {self.health}\nDamage: {self.damage}\nArmor: {self.armor}"
+
+    def give_weapon(self):
+        weapons = []
+        weapons.append(Weapon("Rusty Spear", 3))
+        weapons.append(Weapon("Rusty Cleaver",2))
+        weapons.append(Weapon("Stone Axe", 1))
+        self.weapon = choice(weapons)
 
     def take_damage(self, dmg):
         actual_damage = dmg - self.armor
@@ -60,18 +77,23 @@ class Monster:
         return f"Gruffbarb #{self.id}"
 
 # Functions
-def save_character(character : Character):
+def save_character(characters : list()):
     """
     Takes in a character and breaks down its' attributes och saves them in a file
     Args:
         character (Character): The object that gets saved in a file
     """
 
-    name, health, damage, armor = character.get_all_atributes()
-    with open("character_file.txt", "w", encoding="utf8") as f:
+    saved_characters = []
+    for character in characters:
+        name, health, damage, armor = character.get_all_atributes()
         save_string = f"{name}/{health}/{damage}/{armor}\n"
-        f.write(save_string)
-        print(f"{name} has been successfully saved.")
+        saved_characters.append(save_string)
+
+    with open("character_file.txt", "w", encoding="utf8") as f:
+        for char in saved_characters:
+            f.write(char)
+        print(f"Your characters have been successfully saved.")
 
 def load_characters():
 
@@ -86,4 +108,19 @@ def load_characters():
             characters.append(this_char)
         print("Characters have been loaded from your file:\n")
         return characters
+
+def create_character():
+    print("Welcome to the character creation!")
+    print("What is your character name?")
+    name = input("Name: ")
+    health = randint(10,25)
+    damage = randint(2,6)
+    armor =  randint(0,2)
+    
+    return_char = Character(name, health, damage, armor)
+    print("You have successfully created the following character:")
+    print(return_char)
+    return return_char
+
+
 # Main code

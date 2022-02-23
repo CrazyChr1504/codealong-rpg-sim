@@ -1,11 +1,11 @@
 # Imports
-from resourses import Character, Monster, save_character, load_characters
+from resourses import Character, Monster, Weapon, save_character, load_characters, create_character
 import random
 # Global variables
 turn = 1
 # Classes
 # Functions
-def new_fight(players: list, enemies: list):
+def fight(players: list, enemies: list):
     global turn
     participants = players + enemies # Puts together the participants in one list
     random.shuffle(participants)
@@ -41,23 +41,42 @@ def new_fight(players: list, enemies: list):
 def main():
     
     enemies = []
+    players = load_characters()
    
+    print("Would you like to create a new character? (y/n)")
+    new_char = input(": ")
+    if (new_char.lower() == "y"):
+        new = create_character()
+        players.append(new)
+
+
     for i in range(1, random.randint(3,12)):
         enemies.append(Monster(i))
     
-    #save_character(emy)
-    players = load_characters()
     for player in players:
         print(player)
         print()
     
     while len(enemies) != 0 and len(players) != 0:
-        new_fight(players, enemies)
+        fight(players, enemies)
 
     if len(enemies) == 0:
         print("The players won!\n")
+        print("Whould you like to save the remaining characters? (y/n)")
+        while True:
+            save_progress = input(": ")
+            if save_progress.lower() == "y":
+                save_character(players)
+                for char in players:
+                    print(f"{char}\n")
+                break
+            elif save_progress.lower() == "n":
+                break
+            else:
+                print("That was not a valid option.")
+
     elif len(players) == 0:
-        print("Gruffbarb won!")
+        print("\nGruffbarb won!")
         print("GAME OVER\n")
     
 
